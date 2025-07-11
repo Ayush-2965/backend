@@ -4,4 +4,4 @@ const todoSchema=new mongoose.Schema({
     
 }) 
 
-export const todo=mongoose.model("Todo",todoSchema)
+export const Todo=mongoose.model("Todo",todoSchema)
