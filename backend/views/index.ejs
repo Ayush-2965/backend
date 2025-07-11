@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+</head>
+
+<body>
+    <!-- <form id="downloadForm" method="POST" action="/api/file" target="_blank">
+        <input type="hidden" name="filename" value="postgresql.exe" />
+        <button type="submit">Download</button>
+    </form> -->
+    <button onclick="startDownload()">Normal Download</button>
+    <button onclick="premiumDownload()">Premium Download</button>
+    <div id="status">
+        <span>Your download will start in ...</span>
+        <span class="text"></span>
+    </div>
+    <script>
+        function startDownload() {
+            let a = 0
+            const counter = setInterval(() => {
+                document.getElementsByClassName("text")[0].textContent = a;
+                a++;
+            }, 1000)
+            setTimeout(() => {
+                clearInterval(counter)
+                const a = document.createElement('a');
+                a.href = "/api/file?filename=postgresql.exe";
+                a.style.display = "none"
+                document.body.appendChild(a)
+                a.click()
+                document.body.removeChild(a)
+
+                document.getElementById('status').textContent = "Download Started"
+            }, 10000); // 10 sec delay
+
+
+        }
+        function premiumDownload() {
+            setTimeout(() => {
+
+                const a = document.createElement('a');
+                a.href = "/api/file?filename=postgresql.exe&premium=t";
+                a.style.display = "none"
+                document.body.appendChild(a)
+                a.click()
+                document.body.removeChild(a)
+                document.getElementById('status').textContent = "Download Started"
+            }, 1000); // 1 sec delay
+        }
+    </script>
+</body>
+
+</html>
